@@ -1,24 +1,35 @@
 import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner; // Import the Scanner class to read text files
 
 public class PredictorData {
-    private ArrayList<String> Dataset;
-    public static void main(String[] args) throws FileNotFoundException {
-        ArrayList<ArrayList<Integer>> Dataset = new ArrayList<ArrayList<Integer>>();
-        File DatasetFile = new File("TrainingDataset.txt");
+    private ArrayList<ArrayList<Double>> Dataset;
+    public PredictorData(String file) throws FileNotFoundException {
+        setDataset(file);
+    }
+
+    public void setDataset(String dataset) throws FileNotFoundException {
+        ArrayList<ArrayList<Double>> Data = new ArrayList<ArrayList<Double>>();
+        File DatasetFile = new File(dataset);
         Scanner scan = new Scanner(DatasetFile);
         while(scan.hasNextLine()){
-            ArrayList<Integer> dataSample = new ArrayList<Integer>();
-            String[] dataSampleRaw = scan.nextLine().split("|");
+            ArrayList<Double> dataSample = new ArrayList<Double>();
+            String[] dataSampleRaw = scan.nextLine().split(",");
+
             for(String val : dataSampleRaw){
-                dataSample.add(Integer.valueOf(val));
+                dataSample.add(Double.parseDouble(val.replace("\uFEFF","")));
             }
-            Dataset.add(dataSample);
+            System.out.println(Arrays.toString(dataSampleRaw));
+            Data.add(dataSample);
         }
 
-        System.out.println(Dataset.toString());
+        //System.out.println(Data.toString());
+        Dataset = Data;
+    }
+
+    public ArrayList<ArrayList<Double>> getDataset() {
+        return Dataset;
     }
 }
