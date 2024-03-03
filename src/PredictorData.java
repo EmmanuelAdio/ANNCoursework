@@ -16,12 +16,12 @@ public class PredictorData {
         Scanner scan = new Scanner(DatasetFile);
         while(scan.hasNextLine()){
             ArrayList<Double> dataSample = new ArrayList<Double>();
-            String[] dataSampleRaw = scan.nextLine().split(",");
+            String[] dataSampleRaw = scan.nextLine().split("\\|");
 
             for(String val : dataSampleRaw){
                 dataSample.add(Double.parseDouble(val.replace("\uFEFF","")));
             }
-            System.out.println(Arrays.toString(dataSampleRaw));
+            //System.out.println(Arrays.toString(dataSampleRaw));
             Data.add(dataSample);
         }
 

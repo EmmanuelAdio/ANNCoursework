@@ -7,8 +7,17 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
-        String file = "src/TrainingDataset.csv";
-        PredictorData TrainingData = new PredictorData(file);
-        System.out.println(TrainingData.getDataset().toString());
+        PredictorData TrainingData = new PredictorData("src/TrainingDataset.csv");
+
+        //System.out.println(TrainingData.getDataset().toString());
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println("After 1 epoch");
+        BackPropogation model1 = new BackPropogation(TrainingData.getDataset(),5,10000);
+
+
+
     }
 }
