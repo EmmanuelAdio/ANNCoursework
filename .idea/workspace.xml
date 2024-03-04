@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb5de2ad-f120-43f0-b6ce-f325cd6b0d3d" name="Changes" comment="Setting up the data collection class">
+    <list default="true" id="fb5de2ad-f120-43f0-b6ce-f325cd6b0d3d" name="Changes" comment="Created the Annealing model">
+      <change afterPath="$PROJECT_DIR$/src/WeightDecay.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BackPropogation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackPropogation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TrainingDataset.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/TrainingDataset.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Momentum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Momentum.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,7 +136,39 @@
       <option name="project" value="LOCAL" />
       <updated>1709566088519</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Setting up the data collection class">
+      <option name="closed" value="true" />
+      <created>1709584280462</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1709584280462</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Setting up the data collection class">
+      <option name="closed" value="true" />
+      <created>1709596338463</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1709596338463</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Created the back Propogation model with momentum improvement">
+      <option name="closed" value="true" />
+      <created>1709652239321</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1709652239321</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Created the Annealing model">
+      <option name="closed" value="true" />
+      <created>1709655712855</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1709655712855</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -143,7 +176,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Setting up the data collection class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Setting up the data collection class" />
+    <MESSAGE value="Created the back Propogation model with momentum improvement" />
+    <MESSAGE value="Created the Annealing model" />
+    <option name="LAST_COMMIT_MESSAGE" value="Created the Annealing model" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

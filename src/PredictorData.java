@@ -21,11 +21,10 @@ public class PredictorData {
             for(String val : dataSampleRaw){
                 dataSample.add(Double.parseDouble(val.replace("\uFEFF","")));
             }
-            //System.out.println(Arrays.toString(dataSampleRaw));
+
             Data.add(dataSample);
         }
 
-        //System.out.println(Data.toString());
         Dataset = Data;
     }
 
