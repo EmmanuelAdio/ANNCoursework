@@ -4,7 +4,12 @@ public class Annealing extends BackPropagation {
     public Annealing(ArrayList<ArrayList<Double>> dataset, ArrayList<ArrayList<Double>> valDataset, int nodes, int epochs) {
         super(dataset, valDataset, nodes, epochs);
     }
-//it overides an inherited method
+
+    public Annealing(ArrayList<ArrayList<Double>> dataset, ArrayList<ArrayList<Double>> dataset1, int nodes, int epochs, Weights_Biases wB) {
+        super(dataset, dataset1, nodes, epochs, wB);
+    }
+
+    //it overides an inherited method
     @Override
     public void model(int epochs){
         for(int e = 0; e < epochs; e++){
@@ -18,10 +23,15 @@ public class Annealing extends BackPropagation {
                 for (ArrayList<Double> sample : validationDataset) {
                     forwardPass(sample);
                 }
-            } else {
-                for (ArrayList<Double> sample : trainingDataset) {
-                    updateWeights(sample,backwardPass(sample,forwardPass(sample)),forwardPass(sample));
+                if (calculateMSE() > preMSEVal){
+                    System.out.println("Best Epoch"+e);
+                    break;
+                } else {
+                    preMSEVal = calculateMSE();
                 }
+            }
+            for (ArrayList<Double> sample : trainingDataset) {
+                updateWeights(sample,backwardPass(sample,forwardPass(sample)),forwardPass(sample));
             }
 
         }

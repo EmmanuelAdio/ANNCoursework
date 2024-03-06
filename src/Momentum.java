@@ -10,6 +10,10 @@ public class Momentum extends BackPropagation {
         super(dataset, valDataset, nodes, epochs);
     }
 
+    public Momentum(ArrayList<ArrayList<Double>> dataset, ArrayList<ArrayList<Double>> dataset1, int nodes, int epochs, Weights_Biases wB) {
+        super(dataset, dataset1, nodes, epochs, wB);
+    }
+
     @Override
     public void updateWeights(ArrayList<Double> sample, ArrayList<Double> deltas, ArrayList<Double> outputs) {
         double alpha = 0.9;
@@ -69,6 +73,29 @@ public class Momentum extends BackPropagation {
     @Override
     public void initialise(Integer inputs, Integer nodes) {
         super.initialise(inputs, nodes);
+
+        input_hiddenWeightsChange = new double[nodes][inputs];
+        hiddenLayerBiasesChange = new double[nodes];
+        hidden_outputWeightsChange = new double[nodes];
+
+        for (int i = 0; i < nodes; i++ ){
+            for (int j = 0; j < inputs; j++){
+                input_hiddenWeightsChange[i][j] = 0;
+            }
+        }
+
+        for (int j = 0; j < nodes; j++){
+            hiddenLayerBiasesChange[j] = 0.0;
+
+            hidden_outputWeightsChange[j] = 0.0;
+        }
+
+        outputBiasChange = 0;
+    }
+
+    @Override
+    public void initialise(Weights_Biases W_B) {
+        super.initialise(W_B);
 
         input_hiddenWeightsChange = new double[nodes][inputs];
         hiddenLayerBiasesChange = new double[nodes];

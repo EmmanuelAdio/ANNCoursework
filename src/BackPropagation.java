@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -14,6 +15,9 @@ public class BackPropagation {
     protected double[] hidden_outputWeights;
     protected double outputBias;
 
+    private static final DecimalFormat decFor = new DecimalFormat("0.00000000");
+
+    protected double preMSEVal;
 
     public BackPropagation(ArrayList<ArrayList<Double>> dataset, ArrayList<ArrayList<Double>> valDataset, int nodes, int epochs) {
         this.nodes = nodes;
@@ -23,8 +27,24 @@ public class BackPropagation {
         inputs = trainingDataset.get(0).size() - 1;
         initialise(inputs, nodes);
 
+        System.out.printf("MSE: "+String.valueOf(calculateMSE())+"\n");
         model(epochs);
         showResults();
+        System.out.printf("MSE: "+String.valueOf(calculateMSE())+"\n");
+    }
+
+    public BackPropagation(ArrayList<ArrayList<Double>> dataset, ArrayList<ArrayList<Double>> valDataset, int nodes, int epochs, Weights_Biases w_B) {
+        this.nodes = nodes;
+        trainingDataset = new ArrayList<>(dataset);
+        validationDataset = new ArrayList<>(valDataset);
+
+        inputs = trainingDataset.get(0).size() - 1;
+        initialise(w_B);
+
+        System.out.printf("MSE: "+String.valueOf(calculateMSE())+"\n");
+        model(epochs);
+        showResults();
+        System.out.printf("MSE: "+String.valueOf(calculateMSE())+"\n");
     }
 
     public void model(int epochs){
@@ -33,18 +53,35 @@ public class BackPropagation {
                 for (ArrayList<Double> sample : validationDataset) {
                     forwardPass(sample);
                 }
-            } else {
-                for (ArrayList<Double> sample : trainingDataset) {
-                    updateWeights(sample,backwardPass(sample,forwardPass(sample)),forwardPass(sample));
+                if (calculateMSE() > preMSEVal){
+                    System.out.println("Best Epoch"+e);
+                    break;
+                } else {
+                    preMSEVal = calculateMSE();
                 }
             }
+            for (ArrayList<Double> sample : trainingDataset) {
+                updateWeights(sample,backwardPass(sample,forwardPass(sample)),forwardPass(sample));
+            }
+
 
         }
     }
 
     public double calculateMSE(){
-        double res = 0.0;
-        return res;
+
+        int n = 0;
+        double sum = 0;
+
+        for (ArrayList<Double> sample : trainingDataset) {
+            n++;
+            int s = forwardPass(sample).size();
+            double x = sample.get(sample.size()-1) - forwardPass(sample).get(s-1);
+            sum += x*x;
+        }
+
+        return Double.parseDouble(decFor.format(sum/n));
+
     }
 
     public void showResults(){
@@ -165,6 +202,28 @@ public class BackPropagation {
         Random random2 = new Random();
         outputBias = rangeMin + (rangeMax - rangeMin) * random2.nextDouble();
 
+        preMSEVal = calculateMSE();
+
+    }
+
+    public void initialise(Weights_Biases W_B){
+        learningParameter = W_B.learningParameter;
+
+        input_hiddenWeights = new double[nodes][inputs];
+        hiddenLayerBiases = new double[nodes];
+        hidden_outputWeights = new double[nodes];
+
+        for (int i = 0; i < nodes; i++ ){
+            input_hiddenWeights[i] = W_B.input_hiddenWeights[i].clone();
+        }
+
+        hiddenLayerBiases = W_B.hiddenLayerBiases.clone();
+        hidden_outputWeights = W_B.hidden_outputWeights.clone();
+
+        outputBias = W_B.outputBias;
+
+        preMSEVal = calculateMSE();
+        showWeights();
     }
 
     public void showWeights(){
