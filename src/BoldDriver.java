@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class BoldDriver extends BackPropagation {
@@ -15,31 +16,30 @@ public class BoldDriver extends BackPropagation {
         //System.out.print("MSE: "+String.valueOf(calculateMSE()));
     }
 
-    public BoldDriver(ArrayList<ArrayList<Double>> dataset, ArrayList<ArrayList<Double>> dataset1, int nodes, int epochs, Weights_Biases wB) {
+    public BoldDriver(ArrayList<ArrayList<Double>> dataset, ArrayList<ArrayList<Double>> dataset1, int nodes, int epochs, Weights_Biases wB) throws IOException {
         super(dataset, dataset1, nodes, epochs, wB);
     }
 
     @Override
     public void model(int epochs){
-        System.out.println(learningParameter);
+        MSEexp = "";
+        //System.out.println(learningParameter);
         //System.out.print("MSE: "+String.valueOf(calculateMSE()));
-        preMSE = calculateMSE();
+        preMSE = calculateMSE(validationDataset);
         for(int e = 0; e < epochs; e++){
             if ((e % 100) == 0 ){
-                for (ArrayList<Double> sample : validationDataset) {
-                    forwardPass(sample);
-                }
-                if (calculateMSE() > preMSEVal){
-                    System.out.println("Best Epoch"+e);
-                    break;
-                } else {
-                    preMSEVal = calculateMSE();
-                }
+                MSEexp += Integer.toString(e)+"|"+Double.toString(calculateMSE(validationDataset))+"|"+Double.toString(calculateMSE(trainingDataset))+"\n";
+//                if (calculateMSE(validationDataset) > preMSEVal){
+//                    System.out.println("Broke"+Integer.toString(e));
+//                    break;
+//                } else {
+//                    preMSEVal = calculateMSE(validationDataset);
+//                }
             }
             for (ArrayList<Double> sample : trainingDataset) {
                 updateWeights(sample,backwardPass(sample,forwardPass(sample)),forwardPass(sample));
                 if (e % 1000 == 0){
-                    if (calculateMSE() > (preMSE*1.04)){
+                    if (calculateMSE(trainingDataset) > (preMSE*1.04)){
                         if (learningParameter*0.7 >= 0.01){
                             //revert all the weights
                             for (int i = 0; i < nodes; i++ ){
@@ -58,7 +58,7 @@ public class BoldDriver extends BackPropagation {
                             //decrease learning parameter by 5%.
                             learningParameter = learningParameter*0.7;
                         }
-                    } else if (calculateMSE() < preMSE) {
+                    } else if (calculateMSE(trainingDataset) < preMSE) {
                         if (learningParameter*1.05 <= 0.5){
                             learningParameter *= 1.05;
                         }

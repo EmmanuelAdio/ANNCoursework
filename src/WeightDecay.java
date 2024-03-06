@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class WeightDecay extends BackPropagation {
@@ -10,25 +11,24 @@ public class WeightDecay extends BackPropagation {
 
     }
 
-    public WeightDecay(ArrayList<ArrayList<Double>> dataset, ArrayList<ArrayList<Double>> dataset1, int nodes, int epochs, Weights_Biases wB) {
+    public WeightDecay(ArrayList<ArrayList<Double>> dataset, ArrayList<ArrayList<Double>> dataset1, int nodes, int epochs, Weights_Biases wB) throws IOException {
         super(dataset, dataset1, nodes, epochs, wB);
     }
 
     @Override
     public void model(int epochs) {
+        MSEexp = "";
         calculateOmega();
         for(int e = 0; e < epochs; e++){
             calculateUpsilon(e);
             if ((e % 100) == 0 ){
-                for (ArrayList<Double> sample : validationDataset) {
-                    forwardPass(sample);
-                }
-                if (calculateMSE() > preMSEVal){
-                    System.out.println("Best Epoch"+e);
-                    break;
-                } else {
-                    preMSEVal = calculateMSE();
-                }
+                MSEexp += Integer.toString(e)+"|"+Double.toString(calculateMSE(validationDataset))+"|"+Double.toString(calculateMSE(trainingDataset))+"\n";
+//                if (calculateMSE(validationDataset) > preMSEVal){
+//                    System.out.println("Broke"+Integer.toString(e));
+//                    break;
+//                } else {
+//                    preMSEVal = calculateMSE(validationDataset);
+//                }
             } else {
                 for (ArrayList<Double> sample : trainingDataset) {
                     updateWeights(sample,backwardPass(sample,forwardPass(sample)),forwardPass(sample));

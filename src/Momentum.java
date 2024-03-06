@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Momentum extends BackPropagation {
@@ -10,7 +11,7 @@ public class Momentum extends BackPropagation {
         super(dataset, valDataset, nodes, epochs);
     }
 
-    public Momentum(ArrayList<ArrayList<Double>> dataset, ArrayList<ArrayList<Double>> dataset1, int nodes, int epochs, Weights_Biases wB) {
+    public Momentum(ArrayList<ArrayList<Double>> dataset, ArrayList<ArrayList<Double>> dataset1, int nodes, int epochs, Weights_Biases wB) throws IOException {
         super(dataset, dataset1, nodes, epochs, wB);
     }
 

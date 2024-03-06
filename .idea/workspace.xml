@@ -5,15 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fb5de2ad-f120-43f0-b6ce-f325cd6b0d3d" name="Changes" comment="changed the name of BackPropagation">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Weights_Biases.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Annealing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Annealing.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BackPropagation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackPropagation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BoldDriver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BoldDriver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Momentum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Momentum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TrainingDataset.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/TrainingDataset.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TrainingDataset.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ValidationDataset.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/WeightDecay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/WeightDecay.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -190,7 +189,15 @@
       <option name="project" value="LOCAL" />
       <updated>1709660476247</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="changed the name of BackPropagation">
+      <option name="closed" value="true" />
+      <created>1709747544864</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1709747544864</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="UnknownFeatures">

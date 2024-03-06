@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -6,6 +9,7 @@ import java.util.Random;
 public class BackPropagation {
     final int nodes;
     final int inputs;
+    final int epochs;
     protected final ArrayList<ArrayList<Double>> trainingDataset;
     protected final ArrayList<ArrayList<Double>> validationDataset;
 
@@ -19,7 +23,13 @@ public class BackPropagation {
 
     protected double preMSEVal;
 
+    protected String MSEexp;
+
+    private String results;
+
+
     public BackPropagation(ArrayList<ArrayList<Double>> dataset, ArrayList<ArrayList<Double>> valDataset, int nodes, int epochs) {
+        this.epochs = epochs;
         this.nodes = nodes;
         trainingDataset = new ArrayList<>(dataset);
         validationDataset = new ArrayList<>(valDataset);
@@ -27,13 +37,14 @@ public class BackPropagation {
         inputs = trainingDataset.get(0).size() - 1;
         initialise(inputs, nodes);
 
-        System.out.printf("MSE: "+String.valueOf(calculateMSE())+"\n");
+        System.out.printf("MSE: "+String.valueOf(calculateMSE(validationDataset))+"\n");
         model(epochs);
-        showResults();
-        System.out.printf("MSE: "+String.valueOf(calculateMSE())+"\n");
+        showResults(trainingDataset);
+        System.out.printf("MSE: "+String.valueOf(calculateMSE(validationDataset))+"\n");
     }
 
-    public BackPropagation(ArrayList<ArrayList<Double>> dataset, ArrayList<ArrayList<Double>> valDataset, int nodes, int epochs, Weights_Biases w_B) {
+    public BackPropagation(ArrayList<ArrayList<Double>> dataset, ArrayList<ArrayList<Double>> valDataset, int nodes, int epochs, Weights_Biases w_B) throws IOException {
+        this.epochs = epochs;
         this.nodes = nodes;
         trainingDataset = new ArrayList<>(dataset);
         validationDataset = new ArrayList<>(valDataset);
@@ -41,39 +52,52 @@ public class BackPropagation {
         inputs = trainingDataset.get(0).size() - 1;
         initialise(w_B);
 
-        System.out.printf("MSE: "+String.valueOf(calculateMSE())+"\n");
+        System.out.printf("MSE: "+String.valueOf(calculateMSE(validationDataset))+"\n");
         model(epochs);
-        showResults();
-        System.out.printf("MSE: "+String.valueOf(calculateMSE())+"\n");
+        exportError();
+        showResults(trainingDataset);
+        System.out.printf("MSE: "+String.valueOf(calculateMSE(validationDataset))+"\n");
     }
 
     public void model(int epochs){
+        MSEexp = "";
         for(int e = 0; e < epochs; e++){
             if ((e % 100) == 0 ){
-                for (ArrayList<Double> sample : validationDataset) {
-                    forwardPass(sample);
-                }
-                if (calculateMSE() > preMSEVal){
-                    System.out.println("Best Epoch"+e);
-                    break;
-                } else {
-                    preMSEVal = calculateMSE();
-                }
+                MSEexp += Integer.toString(e)+"|"+Double.toString(calculateMSE(validationDataset))+"|"+Double.toString(calculateMSE(trainingDataset))+"\n";
+//                if (calculateMSE(validationDataset) > preMSEVal){
+//                    System.out.println("Broke"+Integer.toString(e));
+//                    break;
+//                } else {
+//                    preMSEVal = calculateMSE(validationDataset);
+//                }
             }
             for (ArrayList<Double> sample : trainingDataset) {
                 updateWeights(sample,backwardPass(sample,forwardPass(sample)),forwardPass(sample));
+
             }
-
-
         }
     }
 
-    public double calculateMSE(){
+    public void exportError() throws IOException {
+        String filename = "src/Datasets/"+ getClass() +"_"+ Integer.toString(nodes) +"_"+ Integer.toString(epochs)+".txt";
+        File export = new File(filename);
+        if (export.createNewFile()) {
+            FileWriter fWrite = new FileWriter(filename);
+            fWrite.write(MSEexp);
+            fWrite.close();
+        } else {
+            FileWriter fWrite = new FileWriter(filename);
+            fWrite.write(MSEexp);
+            fWrite.close();
+        }
+    }
+
+    public double calculateMSE(ArrayList<ArrayList<Double>> testing){
 
         int n = 0;
         double sum = 0;
 
-        for (ArrayList<Double> sample : trainingDataset) {
+        for (ArrayList<Double> sample : testing) {
             n++;
             int s = forwardPass(sample).size();
             double x = sample.get(sample.size()-1) - forwardPass(sample).get(s-1);
@@ -84,16 +108,17 @@ public class BackPropagation {
 
     }
 
-    public void showResults(){
-        int i = 0;
-        for (ArrayList<Double> sample : trainingDataset) {
-            i++;
+    public void showResults(ArrayList<ArrayList<Double>> testing){
+//        int i = 0;
+        results = "";
+        for (ArrayList<Double> sample : testing) {
+//            i++;
             int s = forwardPass(sample).size();
-            System.out.println(sample.get(sample.size()-1).toString()+"|"+forwardPass(sample).get(s-1).toString());
+            results += sample.get(sample.size()-1).toString()+"|"+forwardPass(sample).get(s-1).toString()+"\n";
 
-            if (i == 10){
-                break;
-            }
+//            if (i == 10){
+//                break;
+//            }
         }
     }
 
@@ -202,7 +227,7 @@ public class BackPropagation {
         Random random2 = new Random();
         outputBias = rangeMin + (rangeMax - rangeMin) * random2.nextDouble();
 
-        preMSEVal = calculateMSE();
+        preMSEVal = calculateMSE(validationDataset);
 
     }
 
@@ -222,7 +247,7 @@ public class BackPropagation {
 
         outputBias = W_B.outputBias;
 
-        preMSEVal = calculateMSE();
+        preMSEVal = calculateMSE(validationDataset);
         showWeights();
     }
 

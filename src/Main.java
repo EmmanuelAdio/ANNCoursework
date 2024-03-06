@@ -1,10 +1,11 @@
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws FileNotFoundException {
-        PredictorData TrainingData = new PredictorData("src/TrainingDataset.txt");
-        PredictorData ValidationData = new PredictorData("src/ValidationDataset.txt");
+    public static void main(String[] args) throws IOException {
+        PredictorData TrainingData = new PredictorData("src/Datasets/TrainingDataset.txt");
+        PredictorData ValidationData = new PredictorData("src/Datasets/ValidationDataset.txt");
 
         Scanner scan = new Scanner(System.in);
         System.out.println("Enter the number of hidden nodes:");
