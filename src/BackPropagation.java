@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class BackPropagation {
+    /**/
     final int nodes;
     final int inputs;
     final int epochs;
@@ -28,7 +29,7 @@ public class BackPropagation {
     private String results;
 
 
-    public BackPropagation(ArrayList<ArrayList<Double>> dataset, ArrayList<ArrayList<Double>> valDataset, int nodes, int epochs) {
+    public BackPropagation(ArrayList<ArrayList<Double>> dataset, ArrayList<ArrayList<Double>> valDataset, int nodes, int epochs) throws IOException {
         this.epochs = epochs;
         this.nodes = nodes;
         trainingDataset = new ArrayList<>(dataset);
@@ -39,7 +40,9 @@ public class BackPropagation {
 
         System.out.printf("MSE: "+String.valueOf(calculateMSE(validationDataset))+"\n");
         model(epochs);
+        exportError();
         showResults(trainingDataset);
+
         System.out.printf("MSE: "+String.valueOf(calculateMSE(validationDataset))+"\n");
     }
 
@@ -64,12 +67,6 @@ public class BackPropagation {
         for(int e = 0; e < epochs; e++){
             if ((e % 100) == 0 ){
                 MSEexp += Integer.toString(e)+"|"+Double.toString(calculateMSE(validationDataset))+"|"+Double.toString(calculateMSE(trainingDataset))+"\n";
-//                if (calculateMSE(validationDataset) > preMSEVal){
-//                    System.out.println("Broke"+Integer.toString(e));
-//                    break;
-//                } else {
-//                    preMSEVal = calculateMSE(validationDataset);
-//                }
             }
             for (ArrayList<Double> sample : trainingDataset) {
                 updateWeights(sample,backwardPass(sample,forwardPass(sample)),forwardPass(sample));
@@ -79,7 +76,21 @@ public class BackPropagation {
     }
 
     public void exportError() throws IOException {
-        String filename = "src/Datasets/"+ getClass() +"_"+ Integer.toString(nodes) +"_"+ Integer.toString(epochs)+".txt";
+        String filename = "src/Datasets/"+ Integer.toString(inputs) +"_"+ getClass() +"_"+ Integer.toString(nodes) +"_"+ Integer.toString(epochs)+".txt";
+        File export = new File(filename);
+        if (export.createNewFile()) {
+            FileWriter fWrite = new FileWriter(filename);
+            fWrite.write(MSEexp);
+            fWrite.close();
+        } else {
+            FileWriter fWrite = new FileWriter(filename);
+            fWrite.write(MSEexp);
+            fWrite.close();
+        }
+    }
+
+    public void exportResults() throws IOException {
+        String filename = "src/Datasets/"+ Integer.toString(inputs) +"_"+ getClass() +"_"+ Integer.toString(nodes) +"_"+ Integer.toString(epochs)+".txt";
         File export = new File(filename);
         if (export.createNewFile()) {
             FileWriter fWrite = new FileWriter(filename);
@@ -93,7 +104,6 @@ public class BackPropagation {
     }
 
     public double calculateMSE(ArrayList<ArrayList<Double>> testing){
-
         int n = 0;
         double sum = 0;
 
@@ -109,16 +119,23 @@ public class BackPropagation {
     }
 
     public void showResults(ArrayList<ArrayList<Double>> testing){
-//        int i = 0;
         results = "";
         for (ArrayList<Double> sample : testing) {
-//            i++;
             int s = forwardPass(sample).size();
             results += sample.get(sample.size()-1).toString()+"|"+forwardPass(sample).get(s-1).toString()+"\n";
+        }
+        showResultsConsole(testing);
+    }
 
-//            if (i == 10){
-//                break;
-//            }
+    public void showResultsConsole(ArrayList<ArrayList<Double>> show){
+        int i = 0;
+        for (ArrayList<Double> sample : show) {
+            i++;
+            int s = forwardPass(sample).size();
+            System.out.println(sample.get(sample.size()-1).toString()+"         "+forwardPass(sample).get(s-1).toString());
+            if (i == 10){
+                break;
+            }
         }
     }
 
@@ -134,7 +151,7 @@ public class BackPropagation {
             }
             //add the bias
             output = output + hiddenLayerBiases[w];
-            outputs.add(sigFunction(output));
+            outputs.add(activationFunction(output));
         }
 
         //do the weighted sum of the hidden node's outputs to the output node.
@@ -145,16 +162,16 @@ public class BackPropagation {
         //add the bias
         output = output + outputBias;
 
-        outputs.add(sigFunction(output));
+        outputs.add(activationFunction(output));
         return outputs;
     }
 
-    public double sigFunction(double output){
+    public double activationFunction(double output){
         output = 1/(1+Math.exp(-output));
         return output;
     }
 
-    public double derivedSigFunction(double output){
+    public double derivedActivationFunction(double output){
             output = output*(1-output);
             return output;
     }
@@ -163,10 +180,10 @@ public class BackPropagation {
     public ArrayList<Double> backwardPass(ArrayList<Double> sample,ArrayList<Double> outputs){
         ArrayList<Double> deltas = new ArrayList<Double>();
         //find the delta function for the final output node formula = (C5-U5)(figOutput5(1-sigOutputs5))
-        double finalDelta = (sample.get(sample.size()-1) - outputs.get(outputs.size()-1))*derivedSigFunction(outputs.get(outputs.size()-1));
+        double finalDelta = (sample.get(sample.size()-1) - outputs.get(outputs.size()-1))* derivedActivationFunction(outputs.get(outputs.size()-1));
 
         for(int i = 0; i < hidden_outputWeights.length ; i++){
-            double delta = (hidden_outputWeights[i])*finalDelta*(derivedSigFunction(outputs.get(i)));
+            double delta = (hidden_outputWeights[i])*finalDelta*(derivedActivationFunction(outputs.get(i)));
             deltas.add(delta);
         }
 
@@ -248,7 +265,7 @@ public class BackPropagation {
         outputBias = W_B.outputBias;
 
         preMSEVal = calculateMSE(validationDataset);
-        showWeights();
+        //showWeights();
     }
 
     public void showWeights(){

@@ -1,13 +1,9 @@
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Annealing extends BackPropagation {
-    public Annealing(ArrayList<ArrayList<Double>> dataset, ArrayList<ArrayList<Double>> valDataset, int nodes, int epochs) throws IOException {
+public class Momentum_Annealing extends Momentum{
+    public Momentum_Annealing(ArrayList<ArrayList<Double>> dataset, ArrayList<ArrayList<Double>> valDataset, int nodes, int epochs) throws IOException {
         super(dataset, valDataset, nodes, epochs);
-    }
-
-    public Annealing(ArrayList<ArrayList<Double>> dataset, ArrayList<ArrayList<Double>> dataset1, int nodes, int epochs, Weights_Biases wB) throws IOException {
-        super(dataset, dataset1, nodes, epochs, wB);
     }
 
     @Override

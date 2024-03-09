@@ -7,7 +7,7 @@ public class Momentum extends BackPropagation {
     private double[] hidden_outputWeightsChange;
     private double outputBiasChange;
 
-    public Momentum(ArrayList<ArrayList<Double>> dataset, ArrayList<ArrayList<Double>> valDataset, int nodes, int epochs) {
+    public Momentum(ArrayList<ArrayList<Double>> dataset, ArrayList<ArrayList<Double>> valDataset, int nodes, int epochs) throws IOException {
         super(dataset, valDataset, nodes, epochs);
     }
 
@@ -17,6 +17,7 @@ public class Momentum extends BackPropagation {
 
     @Override
     public void updateWeights(ArrayList<Double> sample, ArrayList<Double> deltas, ArrayList<Double> outputs) {
+        //System.out.println("HERE!!");
         double alpha = 0.9;
 
         double[][] input_hiddenWeightsPre = new double[nodes][inputs];

@@ -8,7 +8,7 @@ public class BoldDriver extends BackPropagation {
     private double[] hidden_outputWeightsPre;
     private double outputBiasPre;
 
-    public BoldDriver(ArrayList<ArrayList<Double>> dataset, ArrayList<ArrayList<Double>> valDataset, int nodes, int epochs) {
+    public BoldDriver(ArrayList<ArrayList<Double>> dataset, ArrayList<ArrayList<Double>> valDataset, int nodes, int epochs) throws IOException {
         super(dataset, valDataset, nodes, epochs);
 
 
