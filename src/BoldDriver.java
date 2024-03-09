@@ -2,7 +2,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class BoldDriver extends BackPropagation {
-    private double preMSE;
     private double[][] input_hiddenWeightsPre;
     private double[] hiddenLayerBiasesPre;
     private double[] hidden_outputWeightsPre;
@@ -22,24 +21,20 @@ public class BoldDriver extends BackPropagation {
 
     @Override
     public void model(int epochs){
-        MSEexp = "";
-        //System.out.println(learningParameter);
-        //System.out.print("MSE: "+String.valueOf(calculateMSE()));
-        preMSE = calculateMSE(validationDataset);
+        /*This function overrides the Backpropagation model function as it implements annealing features/improvements
+         * parameters:
+         *   - epochs(integer) = the max number of loops through the ANN will perform when training.*/
+        MSEexport = "";
+        double preMSE = calculateMSE(validationDataset);
         for(int e = 0; e < epochs; e++){
             if ((e % 100) == 0 ){
-                MSEexp += Integer.toString(e)+"|"+Double.toString(calculateMSE(validationDataset))+"|"+Double.toString(calculateMSE(trainingDataset))+"\n";
-//                if (calculateMSE(validationDataset) > preMSEVal){
-//                    System.out.println("Broke"+Integer.toString(e));
-//                    break;
-//                } else {
-//                    preMSEVal = calculateMSE(validationDataset);
-//                }
+                MSEexport += Integer.toString(e)+"|"+Double.toString(calculateMSE(validationDataset))+"|"+Double.toString(calculateMSE(trainingDataset))+"\n";
             }
             for (ArrayList<Double> sample : trainingDataset) {
                 updateWeights(sample,backwardPass(sample,forwardPass(sample)),forwardPass(sample));
+                //every 1000 epochs update/change the learning parameter of the model.
                 if (e % 1000 == 0){
-                    if (calculateMSE(trainingDataset) > (preMSE*1.04)){
+                    if (calculateMSE(trainingDataset) > (preMSE *1.04)){
                         if (learningParameter*0.7 >= 0.01){
                             //revert all the weights
                             for (int i = 0; i < nodes; i++ ){
@@ -55,10 +50,11 @@ public class BoldDriver extends BackPropagation {
 
                             outputBias = outputBiasPre;
 
-                            //decrease learning parameter by 5%.
+                            //decrease learning parameter by 30%.
                             learningParameter = learningParameter*0.7;
                         }
                     } else if (calculateMSE(trainingDataset) < preMSE) {
+                        //increase learning parameter by 5% if it does not go past the limit of 0.5
                         if (learningParameter*1.05 <= 0.5){
                             learningParameter *= 1.05;
                         }
@@ -70,6 +66,10 @@ public class BoldDriver extends BackPropagation {
 
     @Override
     public void updateWeights(ArrayList<Double> sample, ArrayList<Double> deltas, ArrayList<Double> outputs) {
+        /*This function overrides the original initialise function to allow the previous weight variable to also be initialised and stored.
+         * parameters:
+         *   - inputs(integer) = the number of predictors in the dataset
+         *   - nodes(integer) = the number of hidden nodes in the neural network.*/
         input_hiddenWeightsPre = new double[nodes][inputs];
         hiddenLayerBiasesPre = new double[nodes];
         hidden_outputWeightsPre = new double[nodes];

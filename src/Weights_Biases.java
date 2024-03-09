@@ -2,10 +2,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Weights_Biases {
-    private int inputs;
-    private ArrayList<ArrayList<Double>> trainingDataset;
-    private ArrayList<ArrayList<Double>> validationDataset;
-
+    /*This function just allows for a weights and biases object to be created and allows for models to be tested with the same initial weights. */
     protected double learningParameter;
     protected double[][] input_hiddenWeights;
     protected double[] hiddenLayerBiases;
@@ -14,11 +11,10 @@ public class Weights_Biases {
 
 
 
-    public Weights_Biases(ArrayList<ArrayList<Double>> dataset, ArrayList<ArrayList<Double>> valDataset, int nodes){
-        this.trainingDataset = new ArrayList<>(dataset);
-        this.validationDataset = new ArrayList<>(valDataset);
+    public Weights_Biases(ArrayList<ArrayList<Double>> dataset, int nodes){
+        ArrayList<ArrayList<Double>> trainingDataset = new ArrayList<>(dataset);
 
-        inputs = trainingDataset.get(0).size() - 1;
+        int inputs = trainingDataset.get(0).size() - 1;
         learningParameter = 0.1;
 
         input_hiddenWeights = new double[nodes][inputs];
@@ -26,8 +22,8 @@ public class Weights_Biases {
         hidden_outputWeights = new double[nodes];
 
 
-        double rangeMin = (double) -2 /inputs;
-        double rangeMax = (double) 2 /inputs;
+        double rangeMin = (double) -2 / inputs;
+        double rangeMax = (double) 2 / inputs;
 
         for (int i = 0; i < nodes; i++ ){
             for (int j = 0; j < inputs; j++){

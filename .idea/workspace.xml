@@ -5,18 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fb5de2ad-f120-43f0-b6ce-f325cd6b0d3d" name="Changes" comment="Made the Export function :)">
-      <change afterPath="$PROJECT_DIR$/src/BackProp_tanh.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/BatchLearning.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Datasets/TestingDataset.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Momentum_Annealing.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Momentum_WeightDecay.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Annealing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Annealing.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BackProp_tanh.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackProp_tanh.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BackPropagation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackPropagation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BatchLearning.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BatchLearning.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BoldDriver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BoldDriver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Momentum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Momentum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Momentum_Annealing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Momentum_Annealing.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Momentum_WeightDecay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Momentum_WeightDecay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PredictorData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PredictorData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/WeightDecay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/WeightDecay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Weights_Biases.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Weights_Biases.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -208,7 +209,15 @@
       <option name="project" value="LOCAL" />
       <updated>1709767224421</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Made the Export function :)">
+      <option name="closed" value="true" />
+      <created>1709950207784</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1709950207784</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="UnknownFeatures">

@@ -17,18 +17,15 @@ public class WeightDecay extends BackPropagation {
 
     @Override
     public void model(int epochs) {
-        MSEexp = "";
+        /*This function overrides the Backpropagation model function as it implements weight decay features/improvements
+         * parameters:
+         *   - epochs(integer) = the max number of loops through the ANN will perform when training.*/
+        MSEexport = "";
         calculateOmega();
         for(int e = 0; e < epochs; e++){
             calculateUpsilon(e);
             if ((e % 100) == 0 ){
-                MSEexp += Integer.toString(e)+"|"+Double.toString(calculateMSE(validationDataset))+"|"+Double.toString(calculateMSE(trainingDataset))+"\n";
-//                if (calculateMSE(validationDataset) > preMSEVal){
-//                    System.out.println("Broke"+Integer.toString(e));
-//                    break;
-//                } else {
-//                    preMSEVal = calculateMSE(validationDataset);
-//                }
+                MSEexport += Integer.toString(e)+"|"+Double.toString(calculateMSE(validationDataset))+"|"+Double.toString(calculateMSE(trainingDataset))+"\n";
             } else {
                 for (ArrayList<Double> sample : trainingDataset) {
                     updateWeights(sample,backwardPass(sample,forwardPass(sample)),forwardPass(sample));
@@ -39,10 +36,11 @@ public class WeightDecay extends BackPropagation {
     }
 
     public void calculateOmega(){
+        /*This function calculates the value of omega using the information about the model's weights and size. */
+
         //sum of all weights squared
         double sum = 0.0;
         int n = 0;
-
 
         for (int i = 0; i < nodes; i++ ){
             for (int j = 0; j < inputs; j++){
@@ -50,15 +48,12 @@ public class WeightDecay extends BackPropagation {
                 sum += input_hiddenWeights[i][j]*input_hiddenWeights[i][j];
             }
         }
-        //n = n + (nodes*inputs);
 
         for (int j = 0; j < nodes; j++){
             sum += hiddenLayerBiases[j]*hiddenLayerBiases[j];
             sum += hidden_outputWeights[j]*hidden_outputWeights[j];
             n++;n++;
         }
-
-        //n = n + (2 * hiddenLayerBiases.length) + 1;
 
         sum += outputBias*outputBias;
         n++;
@@ -67,15 +62,24 @@ public class WeightDecay extends BackPropagation {
     }
 
     public void calculateUpsilon(int e){
+        /*This calculates teh value of upsilon depending on the epoch number we are iterating at.
+         * parameter:
+         *   - e(integer) = the epoch we are on in our training cycle.*/
         upsilon = (1/(learningParameter*e));
     }
 
     @Override
     public ArrayList<Double> backwardPass(ArrayList<Double> sample, ArrayList<Double> outputs) {
+        /*This function overrides the backwardPass from the backpropagation class just add the weight decay features/improvements.
+         * parameter:
+         *   - sample (ArrayList<Double>) = the data sample we are working on from the dataset
+         *   - outputs (ArrayList<Double>) = all the outputs from teh nodes in the neural network.*/
+
         ArrayList<Double> deltas = new ArrayList<Double>();
         //find the delta function for the final output node formula = (C5-U5)(figOutput5(1-sigOutputs5))
         double finalDelta = ((sample.get(sample.size()-1) - outputs.get(outputs.size()-1)) + upsilon*omega)* derivedActivationFunction(outputs.get(outputs.size()-1));
 
+        //calculate the other deltas
         for(int i = 0; i < hidden_outputWeights.length ; i++){
             double delta = (hidden_outputWeights[i])*finalDelta*(derivedActivationFunction(outputs.get(i)));
             deltas.add(delta);

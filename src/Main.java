@@ -22,7 +22,7 @@ public class Main {
                 " and " + Integer.toString(inputs * 2) + ")" + ":";
         System.out.println(nodeMessage);
         nodesS = scan.nextLine();
-        if (((inputs/2)>parseInt(nodesS)) || ((inputs*2)<parseInt(nodesS))) {
+        while (((inputs/2)>parseInt(nodesS)) || ((inputs*2)<parseInt(nodesS))) {
             System.out.println(nodeMessage);
             nodesS = scan.nextLine();
         }
@@ -35,7 +35,7 @@ public class Main {
         int epochs = parseInt(epochsS);
 
         //if you want to run each model on the same initial weights use this W_B object
-        Weights_Biases W_B = new Weights_Biases(TrainingData.getDataset(), ValidationData.getDataset(),nodes);
+        Weights_Biases W_B = new Weights_Biases(TrainingData.getDataset(),nodes);
 
         BackPropagation test1 = new BackPropagation(TrainingData.getDataset(),ValidationData.getDataset(),7,20000);
         test1.showResults(TestingData.getDataset());

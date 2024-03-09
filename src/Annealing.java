@@ -12,7 +12,10 @@ public class Annealing extends BackPropagation {
 
     @Override
     public void model(int epochs){
-        MSEexp = "";
+        /*This function overrides the Backpropagation model function as it implements annealing features/improvements
+        * parameters:
+        *   - epochs(integer) = the max number of loops through the ANN will perform when training.*/
+        MSEexport = "";
         for(int e = 0; e < epochs; e++){
             double end = 0.01;
             double start = 0.1;
@@ -21,13 +24,7 @@ public class Annealing extends BackPropagation {
 
 
             if ((e % 100) == 0 ){
-                MSEexp += Integer.toString(e)+"|"+Double.toString(calculateMSE(validationDataset))+"|"+Double.toString(calculateMSE(trainingDataset))+"\n";
-//                if (calculateMSE(validationDataset) > preMSEVal){
-//                    System.out.println("Broke"+Integer.toString(e));
-//                    break;
-//                } else {
-//                    preMSEVal = calculateMSE(validationDataset);
-//                }
+                MSEexport += Integer.toString(e)+"|"+Double.toString(calculateMSE(validationDataset))+"|"+Double.toString(calculateMSE(trainingDataset))+"\n";
             }
             for (ArrayList<Double> sample : trainingDataset) {
                 updateWeights(sample,backwardPass(sample,forwardPass(sample)),forwardPass(sample));

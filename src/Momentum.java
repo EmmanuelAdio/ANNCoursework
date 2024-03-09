@@ -17,9 +17,15 @@ public class Momentum extends BackPropagation {
 
     @Override
     public void updateWeights(ArrayList<Double> sample, ArrayList<Double> deltas, ArrayList<Double> outputs) {
-        //System.out.println("HERE!!");
+        /*This function overrides update weights function for the momentum algorithm, it simply stores the previous weights and adds the
+        change in weights to the new updated weights
+        Parameter:
+            - sample(ArrayList<Double>) = the sample from the data set that we are currently cycling through
+            - deltas(ArrayList<Double>) = list of delta values calculated from the backwardsPass function
+            - outputs(ArrayList<Double>) = list of the activated outputs of the neural network.*/
         double alpha = 0.9;
 
+        //store the previous weights and biases
         double[][] input_hiddenWeightsPre = new double[nodes][inputs];
         double[] hiddenLayerBiasesPre = new double[nodes];
         double[] hidden_outputWeightsPre = new double[nodes];
@@ -37,6 +43,7 @@ public class Momentum extends BackPropagation {
 
         double outputBiasPre = outputBias;
 
+        //update the weights and biases
         for (int i = 0; i < input_hiddenWeights.length; i++){
             double[] weights = input_hiddenWeights[i];
             for(int j = 0; j < weights.length; j++){
@@ -56,7 +63,7 @@ public class Momentum extends BackPropagation {
         outputBias = outputBias + learningParameter*deltas.get(deltas.size()-1)
                 + alpha*outputBiasChange;
 
-
+        //save teh change in the weights and biases for the next update.
         for (int i = 0; i < nodes; i++ ){
             for (int j = 0; j < inputs; j++){
                 input_hiddenWeightsChange[i][j] = input_hiddenWeights[i][j] - input_hiddenWeightsPre[i][j];
@@ -74,6 +81,10 @@ public class Momentum extends BackPropagation {
 
     @Override
     public void initialise(Integer inputs, Integer nodes) {
+        /*This function overrides the original initialise function to allow the weight changes to also be initialised.
+        * parameters:
+       *   - inputs(integer) = the number of predictors in the dataset
+       *   - nodes(integer) = the number of hidden nodes in the neural network.*/
         super.initialise(inputs, nodes);
 
         input_hiddenWeightsChange = new double[nodes][inputs];
@@ -97,6 +108,10 @@ public class Momentum extends BackPropagation {
 
     @Override
     public void initialise(Weights_Biases W_B) {
+        /*This function overrides the original initialise function to allow the weight changes to also be initialised.
+         * parameters:
+         *   - inputs(integer) = the number of predictors in the dataset
+         *   - nodes(integer) = the number of hidden nodes in the neural network.*/
         super.initialise(W_B);
 
         input_hiddenWeightsChange = new double[nodes][inputs];

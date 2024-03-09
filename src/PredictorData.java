@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Scanner; // Import the Scanner class to read text files
 
 public class PredictorData {
+    /*This function just makes it easier for datasets to be collected and used in the program.*/
     private ArrayList<ArrayList<Double>> Dataset;
     public PredictorData(String file) throws FileNotFoundException {
         setDataset(file);

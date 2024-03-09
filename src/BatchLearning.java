@@ -14,11 +14,11 @@ public class BatchLearning extends BackPropagation{
 
     @Override
     public void model(int epochs){
-        MSEexp = "";
+        MSEexport = "";
         int batchSize = 100;
         for(int e = 0; e < epochs; e++){
             if ((e % 100) == 0 ){
-                MSEexp += Integer.toString(e)+"|"+Double.toString(calculateMSE(validationDataset))+"|"+Double.toString(calculateMSE(trainingDataset))+"\n";
+                MSEexport += Integer.toString(e)+"|"+Double.toString(calculateMSE(validationDataset))+"|"+Double.toString(calculateMSE(trainingDataset))+"\n";
             }
             int size = batchSize;
             for (ArrayList<Double> sample : trainingDataset) {
