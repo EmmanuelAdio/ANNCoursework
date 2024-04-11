@@ -2,10 +2,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Momentum extends BackPropagation {
-    private double[][] input_hiddenWeightsChange;
-    private double[] hiddenLayerBiasesChange;
-    private double[] hidden_outputWeightsChange;
-    private double outputBiasChange;
+    private double[][] input_hiddenWeightsChange;//this is the 2d array used to store the changes in the
+    private double[] hiddenLayerBiasesChange;//this is the array that stores the biases on the hidden nodes in the MLP
+    private double[] hidden_outputWeightsChange;//this is the array of weight on the outputs of the hidden node sin th eMLP
+    private double outputBiasChange;// this is the bias on the output node.
 
     public Momentum(ArrayList<ArrayList<Double>> dataset, ArrayList<ArrayList<Double>> valDataset, int nodes, int epochs) throws IOException {
         super(dataset, valDataset, nodes, epochs);
@@ -63,7 +63,7 @@ public class Momentum extends BackPropagation {
         outputBias = outputBias + learningParameter*deltas.get(deltas.size()-1)
                 + alpha*outputBiasChange;
 
-        //save teh change in the weights and biases for the next update.
+        //save the change in the weights and biases for the next update.
         for (int i = 0; i < nodes; i++ ){
             for (int j = 0; j < inputs; j++){
                 input_hiddenWeightsChange[i][j] = input_hiddenWeights[i][j] - input_hiddenWeightsPre[i][j];

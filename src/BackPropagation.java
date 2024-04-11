@@ -7,12 +7,14 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class BackPropagation {
-    /*This is the base back propagation algorithm the main backbone of this java project*/
-    final int nodes;
-    final int inputs;
-    final int epochs;
-    protected final ArrayList<ArrayList<Double>> trainingDataset;//variable to store the Training dataset
-    protected final ArrayList<ArrayList<Double>> validationDataset;//variable to store the validation dataset
+    /*This is the base MLP class named after the MLP training algorithm (back propagation) used in the model, and it is the main backbone of the project
+    * attributes:
+    *  - nodes (int) : */
+    int nodes;
+    int inputs;
+    int epochs;
+    protected ArrayList<ArrayList<Double>> trainingDataset;//variable to store the Training dataset
+    protected ArrayList<ArrayList<Double>> validationDataset;//variable to store the validation dataset
 
     protected double learningParameter;
     protected double[][] input_hiddenWeights;//array to store the weights of the inputs going into the hidden nodes
@@ -39,10 +41,10 @@ public class BackPropagation {
         inputs = trainingDataset.get(0).size() - 1;
         initialise(inputs, nodes);
 
-        System.out.printf("MSE: "+String.valueOf(calculateMSE(validationDataset))+"\n");
-        model(epochs);
+        //System.out.printf("MSE: "+String.valueOf(calculateMSE(validationDataset))+"\n");
+        training(epochs);
         exportError();
-        showResults(trainingDataset);
+        //showResults(trainingDataset);
 
         System.out.printf("MSE: "+String.valueOf(calculateMSE(validationDataset))+"\n");
     }
@@ -57,15 +59,18 @@ public class BackPropagation {
         inputs = trainingDataset.get(0).size() - 1;
         initialise(w_B);
 
-        System.out.printf("MSE: "+String.valueOf(calculateMSE(validationDataset))+"\n");
-        model(epochs);
+        //System.out.printf("MSE: "+String.valueOf(calculateMSE(validationDataset))+"\n");
+        training(epochs);
         exportError();
-        showResults(trainingDataset);
+        //showResults(trainingDataset);
         System.out.printf("MSE: "+String.valueOf(calculateMSE(validationDataset))+"\n");
     }
 
-    public void model(int epochs){
-        /*This is the function that teh training of the ANN is started.
+    public BackPropagation() {
+    }
+
+    public void training(int epochs){
+        /*This is the function that is used ot train the MLP.
         * parameter:
         *   - epochs(integer) = the max number of loops through the ANN will perform when training.*/
         MSEexport = "";
@@ -77,6 +82,7 @@ public class BackPropagation {
                 updateWeights(sample,backwardPass(sample,forwardPass(sample)),forwardPass(sample));
             }
         }
+        MSEexport += Integer.toString(epochs)+"|"+Double.toString(calculateMSE(validationDataset))+"|"+Double.toString(calculateMSE(trainingDataset))+"\n";
     }
 
     public void exportError() throws IOException {
@@ -147,10 +153,12 @@ public class BackPropagation {
         for (ArrayList<Double> sample : show) {
             i++;
             int s = forwardPass(sample).size();
-            System.out.println(sample.get(sample.size()-1).toString()+"         "+forwardPass(sample).get(s-1).toString());
-            if (i == 10){
-                break;
-            }
+            System.out.println(
+                    sample.get(sample.size()-1).toString()+"         "+
+                    forwardPass(sample).get(s-1).toString());
+//            if (i == 10){
+//                break;
+//            }
         }
     }
 
@@ -169,6 +177,7 @@ public class BackPropagation {
             }
             //add the bias
             output = output + hiddenLayerBiases[w];
+            //apply the activation function to the outputs
             outputs.add(activationFunction(output));
         }
 
@@ -180,13 +189,14 @@ public class BackPropagation {
         //add the bias
         output = output + outputBias;
 
+        //apply the activation function to the outputs
         outputs.add(activationFunction(output));
         return outputs;
     }
 
     public double activationFunction(double output){
         /*
-        This is the activation function applied on the outputs in the neural network, here we are using the sigmoid function
+        This is the activation function applied on the outputs in the MLP, here we are using the sigmoid function
         parameter:
             - output(double) = is the double value that we are applying the sigmoid function to.
         * */
@@ -207,7 +217,7 @@ public class BackPropagation {
 
     public ArrayList<Double> backwardPass(ArrayList<Double> sample,ArrayList<Double> outputs){
         /*
-        This is the back pass function the third step in the back propagation algorithm
+        This is the backward pass function the third step in the back propagation algorithm
         parameter:
             - sample(ArrayList<Double>) = this is the data sample in the dataset that we are currently on.
             - outputs(ArrayList<Double>) = is the list of outputs that the neural networks nodes  (hidden and output) produce
@@ -268,7 +278,7 @@ public class BackPropagation {
         hiddenLayerBiases = new double[nodes];
         hidden_outputWeights = new double[nodes];
 
-
+        //set teh range for the random initial weights.
         double rangeMin = (double) -2 /inputs;
         double rangeMax = (double) 2 /inputs;
 
@@ -298,7 +308,7 @@ public class BackPropagation {
     }
 
     public void initialise(Weights_Biases W_B){
-        /*This is just the weight initialising function that randomizes the models initial weights
+        /*#This is the function that takes the pre-made weights and biases to initialise the weights and biases in the MLP
          * parameter:
          *   - inputs = the number of predictors in the dataset
          *   - nodes = the number of hidden nodes in the neural network.*/

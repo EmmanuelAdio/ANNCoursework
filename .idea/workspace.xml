@@ -4,20 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb5de2ad-f120-43f0-b6ce-f325cd6b0d3d" name="Changes" comment="Made the Export function :)">
+    <list default="true" id="fb5de2ad-f120-43f0-b6ce-f325cd6b0d3d" name="Changes" comment="Added comments to my code">
+      <change afterPath="$PROJECT_DIR$/src/Annealing_WeightDecay.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/LinearRegressionFromScratch.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Momentum_Annealing_WeightDecay.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Momentum_BoldDriver.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Tan_Annealing.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Tan_BoldDriver.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Tan_Momentum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Tan_WeightDecay.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Annealing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Annealing.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BackProp_tanh.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackProp_tanh.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BackPropagation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackPropagation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BatchLearning.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BatchLearning.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BoldDriver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BoldDriver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Datasets/class Annealing_8_10000.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Datasets/class BackPropagation_8_10000.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Datasets/class BoldDriver_8_10000.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Datasets/class Momentum_8_10000.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Datasets/class WeightDecay_8_10000.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Momentum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Momentum.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Momentum_Annealing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Momentum_Annealing.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Momentum_WeightDecay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Momentum_WeightDecay.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/PredictorData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PredictorData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/WeightDecay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/WeightDecay.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Weights_Biases.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Weights_Biases.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,26 +59,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Application.PredictorData.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;RainbowCSV.Settings&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.LinearRegressionFromScratch.executor": "Run",
+    "Application.Main.executor": "Run",
+    "Application.PredictorData.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Emman/eclipse-workspace/Week4Tasks",
+    "settings.editor.selected.configurable": "RainbowCSV.Settings"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Emman\IdeaProjects\ANNCoursework\src" />
       <recent name="C:\Users\Emman\IdeaProjects\ANNCoursework" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Application.LinearRegressionFromScratch">
+    <configuration name="LinearRegressionFromScratch" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="LinearRegressionFromScratch" />
+      <module name="ANNCoursework" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="ANNCoursework" />
@@ -84,6 +104,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.LinearRegressionFromScratch" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.PredictorData" />
       </list>
@@ -217,7 +238,15 @@
       <option name="project" value="LOCAL" />
       <updated>1709950207784</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Added comments to my code">
+      <option name="closed" value="true" />
+      <created>1709965440762</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1709965440762</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -231,7 +260,8 @@
     <MESSAGE value="Created the Annealing model" />
     <MESSAGE value="changed the name of BackPropagation" />
     <MESSAGE value="Made the Export function :)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Made the Export function :)" />
+    <MESSAGE value="Added comments to my code" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added comments to my code" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

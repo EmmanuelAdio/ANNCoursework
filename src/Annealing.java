@@ -11,15 +11,16 @@ public class Annealing extends BackPropagation {
     }
 
     @Override
-    public void model(int epochs){
+    public void training(int epochs){
         /*This function overrides the Backpropagation model function as it implements annealing features/improvements
         * parameters:
         *   - epochs(integer) = the max number of loops through the ANN will perform when training.*/
         MSEexport = "";
         for(int e = 0; e < epochs; e++){
+
+            //apply the annealing formula to the leaning parameter to change it every epoch.
             double end = 0.01;
             double start = 0.1;
-
             learningParameter = end + (start - end)*(1 - 1/(1 + Math.exp(10 - ((double) (20 * e) /epochs))));
 
 

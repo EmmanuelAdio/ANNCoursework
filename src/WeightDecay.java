@@ -8,7 +8,6 @@ public class WeightDecay extends BackPropagation {
 
     public WeightDecay(ArrayList<ArrayList<Double>> dataset, ArrayList<ArrayList<Double>> valDataset, int nodes, int epochs) throws IOException {
         super(dataset, valDataset, nodes, epochs);
-
     }
 
     public WeightDecay(ArrayList<ArrayList<Double>> dataset, ArrayList<ArrayList<Double>> dataset1, int nodes, int epochs, Weights_Biases wB) throws IOException {
@@ -16,7 +15,7 @@ public class WeightDecay extends BackPropagation {
     }
 
     @Override
-    public void model(int epochs) {
+    public void training(int epochs) {
         /*This function overrides the Backpropagation model function as it implements weight decay features/improvements
          * parameters:
          *   - epochs(integer) = the max number of loops through the ANN will perform when training.*/
@@ -36,7 +35,7 @@ public class WeightDecay extends BackPropagation {
     }
 
     public void calculateOmega(){
-        /*This function calculates the value of omega using the information about the model's weights and size. */
+        /*This function calculates the value of omega using the information about the MLP's weights and size. */
 
         //sum of all weights squared
         double sum = 0.0;
@@ -58,11 +57,12 @@ public class WeightDecay extends BackPropagation {
         sum += outputBias*outputBias;
         n++;
 
+        //multiply the sum by the inverse of the number of weights and biases.
         omega = ((double) 1 /(2*n))*sum;
     }
 
     public void calculateUpsilon(int e){
-        /*This calculates teh value of upsilon depending on the epoch number we are iterating at.
+        /*This calculates the value of upsilon depending on the epoch number we are iterating at.
          * parameter:
          *   - e(integer) = the epoch we are on in our training cycle.*/
         upsilon = (1/(learningParameter*e));
@@ -70,13 +70,15 @@ public class WeightDecay extends BackPropagation {
 
     @Override
     public ArrayList<Double> backwardPass(ArrayList<Double> sample, ArrayList<Double> outputs) {
-        /*This function overrides the backwardPass from the backpropagation class just add the weight decay features/improvements.
+        /*This function overrides the backwardPass from the backpropagation class just add the weight decay features/improvements. add the penalty term to the final delta c
+        calculation.
          * parameter:
          *   - sample (ArrayList<Double>) = the data sample we are working on from the dataset
-         *   - outputs (ArrayList<Double>) = all the outputs from teh nodes in the neural network.*/
+         *   - outputs (ArrayList<Double>) = all the outputs from the nodes in the neural network.*/
 
         ArrayList<Double> deltas = new ArrayList<Double>();
-        //find the delta function for the final output node formula = (C5-U5)(figOutput5(1-sigOutputs5))
+        //modify the final delta calculation.
+        //find the delta function for the final output node formula = (C5-U5 + upsilon*omega)(figOutput5(1-sigOutputs5))
         double finalDelta = ((sample.get(sample.size()-1) - outputs.get(outputs.size()-1)) + upsilon*omega)* derivedActivationFunction(outputs.get(outputs.size()-1));
 
         //calculate the other deltas
